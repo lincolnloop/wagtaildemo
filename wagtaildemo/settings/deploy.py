@@ -13,6 +13,10 @@ DATABASES = {
     'default': dj_database_url.parse(
         DEPLOY_CONFIG.get('default', 'DATABASE_URL'))
 }
+SECRET_KEY = DEPLOY_CONFIG.get('default', 'SECRET_KEY')
+ALLOWED_HOSTS = DEPLOY_CONFIG.get('default', 'ALLOWED_HOSTS').split(',')
+
+STATIC_ROOT = DEPLOY_CONFIG.get('default', 'STATIC_ROOT')
 
 
 WAGTAILSEARCH_BACKENDS = {
