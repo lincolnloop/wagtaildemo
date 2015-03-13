@@ -1,6 +1,18 @@
+import os
+from ConfigParser import ConfigParser
+import dj_database_url
+
 from .base import *
 
+DEPLOY_CONFIG = ConfigParser()
+DEPLOY_CONFIG.read('/etc/wagtail_deploy.ini')
+
 DEBUG = False
+
+DATABASES = {
+    'default': dj_database_url.parse(
+        DEPLOY_CONFIG.get('default', 'database_url'))
+}
 
 
 WAGTAILSEARCH_BACKENDS = {
@@ -13,8 +25,7 @@ WAGTAILSEARCH_BACKENDS = {
 
 INSTALLED_APPS+= (
     'djcelery',
-    'kombu.transport.django',
-    'gunicorn',    
+    'kombu.transport.django'
 )
 
 
@@ -44,9 +55,3 @@ djcelery.setup_loader()
 BROKER_URL = 'redis://'
 CELERY_SEND_TASK_ERROR_EMAILS = True
 CELERYD_LOG_COLOR = False
-
-
-try:
-	from .local import *
-except ImportError:
-	pass
