@@ -11,7 +11,7 @@ DEBUG = False
 
 DATABASES = {
     'default': dj_database_url.parse(
-        DEPLOY_CONFIG.get('default', 'database_url'))
+        DEPLOY_CONFIG.get('default', 'DATABASE_URL'))
 }
 
 
