@@ -55,13 +55,6 @@ WAGTAILSEARCH_BACKENDS = {
     }
 }
 
-
-INSTALLED_APPS+= (
-    'djcelery',
-    'kombu.transport.django'
-)
-
-
 CACHES = {
     'default': {
         'BACKEND': 'redis_cache.cache.RedisCache',
@@ -80,10 +73,6 @@ TEMPLATE_LOADERS = (
         'django.template.loaders.app_directories.Loader',
     )),
 )
-
-# CELERY SETTINGS
-import djcelery
-djcelery.setup_loader()
 
 BROKER_URL = 'redis://'
 CELERY_SEND_TASK_ERROR_EMAILS = True
