@@ -51,6 +51,7 @@ LOGGING = {
 WAGTAILSEARCH_BACKENDS = {
     'default': {
         'BACKEND': 'wagtail.wagtailsearch.backends.elasticsearch.ElasticSearch',
+        'URLS': DEPLOY_CONFIG.get('default', 'ES_HOSTS').split(','),
         'INDEX': 'wagtaildemo'
     }
 }
@@ -58,7 +59,7 @@ WAGTAILSEARCH_BACKENDS = {
 CACHES = {
     'default': {
         'BACKEND': 'redis_cache.cache.RedisCache',
-        'LOCATION': '127.0.0.1:6379',
+        'LOCATION': DEPLOY_CONFIG.get('default', 'CACHE_HOST'),
         'KEY_PREFIX': 'wagtaildemo',
         'OPTIONS': {
             'CLIENT_CLASS': 'redis_cache.client.DefaultClient',
@@ -74,6 +75,6 @@ TEMPLATE_LOADERS = (
     )),
 )
 
-BROKER_URL = 'redis://'
+BROKER_URL = DEPLOY_CONFIG.get('default', 'BROKER_URL')
 CELERY_SEND_TASK_ERROR_EMAILS = True
 CELERYD_LOG_COLOR = False
