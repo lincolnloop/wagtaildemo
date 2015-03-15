@@ -1,5 +1,6 @@
 import os
 from ConfigParser import ConfigParser
+from urlparse import urlparse
 import dj_database_url
 
 from .base import *
@@ -56,13 +57,16 @@ WAGTAILSEARCH_BACKENDS = {
     }
 }
 
+# Parse redis://host:port/db
+_CACHE_URLPARSED = urlparse(DEPLOY_CONFIG.get('default', 'CACHE_URL'))
 CACHES = {
     'default': {
         'BACKEND': 'redis_cache.cache.RedisCache',
-        'LOCATION': DEPLOY_CONFIG.get('default', 'CACHE_HOST'),
+        'LOCATION': _CACHE_URLPARSED.netloc,
         'KEY_PREFIX': 'wagtaildemo',
         'OPTIONS': {
             'CLIENT_CLASS': 'redis_cache.client.DefaultClient',
+            'DB': _CACHE_URLPARSED.path.strip('/'),
         }
     }
 }
