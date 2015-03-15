@@ -52,7 +52,7 @@ LOGGING = {
 WAGTAILSEARCH_BACKENDS = {
     'default': {
         'BACKEND': 'wagtail.wagtailsearch.backends.elasticsearch.ElasticSearch',
-        'URLS': DEPLOY_CONFIG.get('default', 'ES_HOSTS').split(','),
+        'URLS': DEPLOY_CONFIG.get('default', 'ES_URLS').split(','),
         'INDEX': 'wagtaildemo'
     }
 }
