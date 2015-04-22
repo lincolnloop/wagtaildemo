@@ -7,7 +7,7 @@ from .base import *
 
 # Read deployment variables from file
 _deploy_config_path = os.environ.get('DEPLOY_CONFIG_FILE',
-                                    '/srv/wagtail/deploy_env.json')
+                                    '/srv/wagtaildemo/deploy_env.json')
 with open(_deploy_config_path) as _deploy_config_file:
     DEPLOY_CONFIG = json.load(_deploy_config_file)
 
