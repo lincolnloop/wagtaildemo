@@ -20,7 +20,9 @@ DATABASES = {
 SECRET_KEY = DEPLOY_CONFIG.get('SECRET_KEY')
 ALLOWED_HOSTS = DEPLOY_CONFIG.get('ALLOWED_HOSTS')
 
-STATIC_ROOT = DEPLOY_CONFIG.get('STATIC_ROOT')
+# Drop static files outside the source directory,
+# but inside the versioned virtualenv
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 LOGGING = {
     'version': 1,
